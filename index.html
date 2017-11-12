@@ -1,0 +1,222 @@
+<!doctype html />
+<html lang="en-US">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Media Catalogue</title>
+
+<!-- LOAD CSS -->
+
+      <!-- Normalize settings will be loaded as part of Bootstrap CSS
+      <link rel="stylesheet" href="css/normalize.css" />
+      -->
+      <!-- Bootstrap CSS CDN -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous" />
+      <!-- custom stylings -->
+      <link rel="stylesheet" href="css/custom.css" />
+
+   </head>
+   <body>
+
+<!-- beginning of main wrap/container -->
+
+      <!-- Bootstrap fluid container
+	   with no gutters (margins, paddings, etc.) -->
+      <div id="wrap" class="container.fluid no-gutters">
+	 <!-- one row is being used to create a grid with
+              either two equal (six wide) columns apiece
+	      or stacked (twelve wide) columns in small displays -->
+	 <div class="row">
+
+	    <!-- one column is the book information view area,
+		 which should be provided by JavaScript -->
+	    <div id="view" class="col col-12 order-2 col-md-6 order-md-1">
+	    </div>
+
+	    <!-- the other column is the book information entry form,
+		 some of which is provided by JavaScript -->
+	    <div id="entry" class="col col-12 order-1 col-md-6 order-md-2">
+
+	       <!-- entry form buttons and related help messages -->
+	       <form class="form-inline mt-3">
+		  <div class="col col-4">
+		     <button id="new_or_submit" type="submit" class="btn btn-primary" aria-describedby="primary_button_help"></button>
+		     <small id="primary_button_help" class="form-text text-muted"></small>
+		  </div>
+		  <div class="col col-4 center-block">
+		     <button id="clear" type="submit" class="btn btn-secondary" aria-describedby="secondary_button_help">Clear Form</button>
+		     <small id="secondary_button_help" class="form-text text-muted"></small>
+		  </div>
+		  <div class="col col-4 center-block">
+		     <button id="commit" type="submit" class="btn btn-tertiary" aria-describedby="tertiary_button_help">Commit</button> 
+		     <small id="tertiary_button_help" class="form-text text-muted"></small>
+		  </div>
+		  <div class="col col-12">
+		     <small id="title_help" class="form-text text-muted"></small>
+		  </div>
+	       </form>
+
+	       <!-- title input field -->
+	       <form class="form-inline mb-3">
+		  <label class="col-form-label mr-2" for="title">Title:</label>
+		  <input class="form-control form-control-sm" type="text" id="title" value="" name="title" size="40" />
+	       </form>
+
+	       <!-- stub placeholding additional fields for another time
+	       <form class="form-inline mb-3 mr-2">
+		  <label class="col-form-label mr-2" for="critic">Critic:</label>
+		  <input class="form-control form-control-sm" type="text" id="critic" name="critic" />
+	       </form>
+	       <div class="form-group row">
+		  <div class="form-inline col-xl-6">
+		     <label class="col-form-label mr-2" for="rating">Rating:</label>
+		     <input class="form-control form-control-sm" type="text" id="rating" name="rating" />
+		  </div>
+		  <div class="form-inline col-xl-6">
+		     <label class="col-form-label mr-2" for="highest_possible_rating">Out of:</label>
+		     <input class="form-control form-control-sm" type="text" id="highest_possible_rating" name="highest_possible_rating" />
+		  </div>
+	       </div>
+	       -->
+
+	       <!-- checkbox inputs -->
+	       <form id="checkboxGroup" class="form-inline mt-4 mb-3">
+		  <label class="custom-control custom-checkbox mr-3" for="read">
+		     <input class="custom-control-input" type="checkbox" id="read" />
+		     <span class="custom-control-indicator"></span>
+		     <span class="custom-control-description">Read</span>
+		  </label>
+		  <label class="custom-control custom-checkbox mr-3" for="own">
+		     <input class="custom-control-input" type="checkbox" id="own" />
+		     <span class="custom-control-indicator"></span>
+		     <span class="custom-control-description">Own</span>
+		  </label>
+		  <label class="custom-control custom-checkbox mr-3" for="loaned">
+		     <input class="custom-control-input" type="checkbox" id="loaned" />
+		     <span class="custom-control-indicator"></span>
+		     <span class="custom-control-description">Loaned</span>
+		  </label>
+		  <label class="custom-control custom-checkbox mr-3" for="wishlist">
+		     <input class="custom-control-input" type="checkbox" id="wishlist" />
+		     <span class="custom-control-indicator"></span>
+		     <span class="custom-control-description">Wishlist</span>
+		  </label>
+	       </form>
+
+	       <!-- radiobutton input group -->
+	       <form id='readabilityEase' class="form-inline mb-3">
+		  <label class="col-form-label mr-3">Readability ease:</label>
+		  <label class="custom-control custom-radio mr-3" for="pageTurner">
+		     <input class="custom-control-input" type="radio" id="pageTurner" value="pageTurner" name="readabilityEase" />
+		     <span class="custom-control-indicator"></span>
+		     <span class="custom-control-description">Page turner</span>
+		  </label>
+		  <label class="custom-control custom-radio mr-3" for="variablePacing">
+		     <input class="custom-control-input" type="radio" id="variablePacing" value="variablePacing" name="readabilityEase" />
+		     <span class="custom-control-indicator"></span>
+		     <span class="custom-control-description">Variable pacing</span>
+		  </label>
+		  <label class="custom-control custom-radio mr-3" for="hardSlog">
+		     <input class="custom-control-input" type="radio" id="hardSlog" value="hardSlog" name="readabilityEase" />
+		     <span class="custom-control-indicator"></span>
+		     <span class="custom-control-description">Hard slog</span>
+		  </label>
+	       </form>
+
+	       <!-- radiobutton input group -->
+	       <form id='insightsOffered' class="form-inline mb-3">
+		  <label class="col-form-label mr-3">Insights offered:</label>
+		  <label class="custom-control custom-radio mr-3" for="quiteInfluential">
+		     <input class="custom-control-input" type="radio" id="quiteInfluential" value="quiteInfluential" name="insightsOffered" />
+		     <span class="custom-control-indicator"></span>
+		     <span class="custom-control-description">Quite influential</span>
+		  </label>
+		  <label class="custom-control custom-radio mr-3" for="someValue">
+		     <input class="custom-control-input" type="radio" id="someValue" value="someValue" name="insightsOffered" />
+		     <span class="custom-control-indicator"></span>
+		     <span class="custom-control-description">Some value</span>
+		  </label>
+		  <label class="custom-control custom-radio mr-3" for="lackedSubstance">
+		     <input class="custom-control-input" type="radio" id="lackedSubstance" value="lackedSubstance" name="insightsOffered" />
+		     <span class="custom-control-indicator"></span>
+		     <span class="custom-control-description">Lacked substance</span>
+		  </label>
+	       </form>
+
+	       <!-- radiobutton input group -->
+	       <form id='enjoymentLevel' class="form-inline mb-3">
+		  <label class="col-form-label mr-3">Enjoyment level:</label>
+		  <label class="custom-control custom-radio mr-3" for="thoroughlyRelished">
+		     <input class="custom-control-input" type="radio" id="thoroughlyRelished" value="thoroughlyRelished" name="enjoymentLevel" />
+		     <span class="custom-control-indicator"></span>
+		     <span class="custom-control-description">Thoroughly relished</span>
+		  </label>
+		  <label class="custom-control custom-radio mr-3" for="likedModerately">
+		     <input class="custom-control-input" type="radio" id="likedModerately" value="likedModerately" name="enjoymentLevel" />
+		     <span class="custom-control-indicator"></span>
+		     <span class="custom-control-description">Liked moderately</span>
+		  </label>
+		  <label class="custom-control custom-radio mr-3" for="sufferedThrough">
+		     <input class="custom-control-input" type="radio" id="sufferedThrough" value="sufferedThrough" name="enjoymentLevel" />
+		     <span class="custom-control-indicator"></span>
+		     <span class="custom-control-description">Suffered through</span>
+		  </label>
+	       </form>
+
+	    </div> <!-- end of second column -->
+	 </div> <!-- end of row -->
+
+	 <!-- the following row and column block was unintended,
+	      rather it has been included because JavaScript
+	      security does not allow file modifications -->
+	 <div class="row">
+	    <div id="output" class="col col-12">
+	    </div>
+	 </div> <!-- end of unintended block -->
+
+      </div>
+
+<!-- end of main wrap/container -->
+
+<!-- begin footer -->
+
+      <div class="container.fluid no-gutters">
+	 <div class="row">
+	    <div id="footer" class="col col-12">
+	       <p class="text-center no-gutters">&copy; 2017 Bryan Alexander.</p>
+	    </div>
+	 </div>
+      </div>
+
+<!-- end footer -->
+
+<!-- LOAD SCRIPTS -->
+
+      <!-- custom JavaScript -->
+      <script id="bookData" src="js/data.js" type="text/javascript" charset="utf-8"></script>  
+      <script src="js/script.js" type="text/javascript" charset="utf-8"></script>  
+      <!-- jQuery CDN -->
+      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+      <!-- jQuery local fallback -->
+      <script>window.jQuery || document.write('<script src="js/jquery-3.2.1.slim.min.js"><\/script>')</script>
+      <!-- Popper needed for dropdown menus; Popper fallback may not work -->
+      <!-- Popper CDN -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+      <!-- Popper local fallback -->
+      <script>if(typeof(Popper) === 'undefined') {document.write('<script src="js/popper.min.js"><\/script>')}</script>
+      <!-- Bootstrap JS CDN -->
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+      <!-- Bootstrap JS local fallback -->
+      <script>if(typeof($.fn.modal) === 'undefined') {document.write('<script src="js/bootstrap.min.js"><\/script>')}</script>
+      <!-- Bootstrap CSS local fallback was not working on refresh -->
+      <div id="bootstrapCssTest" class="hidden"></div>
+      <script>
+	 $(function() {
+	    if ($('#bootstrapCssTest').is(':visible')) {
+	    $("head").prepend('<link rel="stylesheet" href="css/bootstrap.min.css" \/><link rel="stylesheet" href="css/custom.css" \/>');
+	    }
+	 });
+      </script>
+
+   </body>
+</html>

@@ -1,0 +1,96 @@
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+   Background colors
+    and text/foreground
+   colors for entry and view halves
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+
+body {
+   background-color: seashell;
+}
+
+#entry {
+   background-color: mintcream;
+   color: midnightblue;
+}
+
+#view {
+   background-color: lightgoldenrodyellow;
+   color: rebeccapurple;
+}
+
+#output {
+   color: darkslateblue;
+}
+
+#footer {
+   background-color: #306;
+   color: yellow;
+}
+
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+   Button stylings
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+
+.btn-tertiary {
+   background-color: gainsboro;
+   color: maroon;
+}
+
+/* default btn font and padding */
+.btn {
+   font-size: 0.75rem;
+   padding: 0.5rem;
+}
+
+/* for larger than extra extra small displays */
+@media screen and ( min-width: 400px ) {
+   .btn {
+      font-size: 1rem;
+   }
+}
+
+/* for medium displays */
+@media screen and ( min-width: 768px ) {
+   .btn {
+      font-size: 0.75rem;
+   }
+}
+
+/* for larger than medium displays */
+@media screen and ( min-width: 992px ) {
+   .btn {
+      font-size: 1rem;
+   }
+}
+
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+   Set up sticky footer
+    Notes:
+     no padding or margins can be added
+      to the html or body
+     #wrap margin and padding bottoms
+      are related to the height of the
+      #footer, where padding is its equal
+      and margin bottom is its opposite
+     #footer height has to be a little 
+      taller than the font-size;
+      otherwise, there will be some
+      body that shows below the footer
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+
+html, body {
+   height: 100%;
+   /* no padding or margins can be added */
+}
+
+#wrap {
+   min-height: 100%;
+   height: auto;
+   margin: 0 auto -2.35rem;
+   padding: 0 0 2.35rem;
+}
+
+#footer {
+   height: 2.35rem;
+   font-size: 0.9rem;
+}
