@@ -438,7 +438,12 @@ enjoymentLevelRadioGroup.addEventListener ( 'click', ( event ) => {
 	 copyOfSelectedBook[enjoymentLevelProperty] = event.target.value;
       }
       // in search mode, update the viewDiv with the change in selection
-      if ( searchMode ) { lookForBooksMatching ( copyOfSelectedBook ); }
+      //  otherwise, update the viewDiv with the current entry information
+      if ( searchMode ) {
+	 lookForBooksMatching ( copyOfSelectedBook );
+      } else {
+	 print ( makeTheHTMLforOneBook ( copyOfSelectedBook ) );
+      }
    }
 } );
 
@@ -455,7 +460,12 @@ insightsOfferedRadioGroup.addEventListener ( 'click', ( event ) => {
 	 copyOfSelectedBook[insightsOfferedProperty] = event.target.value;
       }
       // in search mode, update the viewDiv with the change in selection
-      if ( searchMode ) { lookForBooksMatching ( copyOfSelectedBook ); }
+      //  otherwise, update the viewDiv with the current entry information
+      if ( searchMode ) {
+	 lookForBooksMatching ( copyOfSelectedBook );
+      } else {
+	 print ( makeTheHTMLforOneBook ( copyOfSelectedBook ) );
+      }
    }
 } );
 
@@ -491,7 +501,12 @@ checkboxGroup.addEventListener ( 'click', ( event ) => {
       copyOfSelectedBook[readProperty] = readInput.checked;
       copyOfSelectedBook[wishlistProperty] = wishlistInput.checked;
       // in search mode, update the viewDiv with the change in selection
-      if ( searchMode ) { lookForBooksMatching ( copyOfSelectedBook ); }
+      //  otherwise, update the viewDiv with the current entry information
+      if ( searchMode ) {
+	 lookForBooksMatching ( copyOfSelectedBook );
+      } else {
+	 print ( makeTheHTMLforOneBook ( copyOfSelectedBook ) );
+      }
    }
 } );
 
@@ -535,7 +550,12 @@ readabilityEaseRadioGroup.addEventListener ( 'click', ( event ) => {
 	 copyOfSelectedBook[readabilityEaseProperty] = event.target.value;
       }
       // in search mode, update the viewDiv with the change in selection
-      if ( searchMode ) { lookForBooksMatching ( copyOfSelectedBook ); }
+      //  otherwise, update the viewDiv with the current entry information
+      if ( searchMode ) {
+	 lookForBooksMatching ( copyOfSelectedBook );
+      } else {
+	 print ( makeTheHTMLforOneBook ( copyOfSelectedBook ) );
+      }
    }
 } );
 
@@ -546,6 +566,8 @@ titleInput.addEventListener ( 'click', ( event ) => {
    copyOfSelectedBook[titleProperty] = titleInput.value;
    if ( searchMode ) {
       lookForBooksMatching ( copyOfSelectedBook );
+   } else {
+      print ( makeTheHTMLforOneBook ( copyOfSelectedBook ) );
    }
 } );
 
