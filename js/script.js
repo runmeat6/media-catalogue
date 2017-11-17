@@ -136,6 +136,7 @@ function clearForm ( ) {
    copyOfSelectedBook[readabilityEaseProperty] = '';
    copyOfSelectedBook[insightsOfferedProperty] = '';
    copyOfSelectedBook[enjoymentLevelProperty] = '';
+   startSearchMode();
    lookForBooksMatching ( copyOfSelectedBook );
 // remove the following line in future implementation
    outputDiv.innerHTML = ''; // not part of the normal function
@@ -282,7 +283,6 @@ function lookForBooksMatching ( bookToMatch ) {
 //   will be added as a property of each book object in it
 //  and initialize the working copy book object
 function makeSomeInitializations ( ) {
-   startSearchMode();
    clearForm();
    print ( standardMessage );
    books.forEach ( updateBookNumbers );
@@ -368,6 +368,9 @@ function print ( message ) {
 }
 
 // set parameters according to search mode
+//  startSearchMode is only called by clearForm,
+//  but it still seems right to keep them separated if for no
+//  other reason than startSubmitMode has its own function
 function startSearchMode ( ) {
    searchMode = true;
    newOrSubmitButton.innerHTML = searchModeButtonText;
@@ -392,6 +395,15 @@ function updateBookNumbers ( book, index ) {
    book[bookNumberProperty] = index;
 }
 
+// in search mode, update the viewDiv with the change in selection;
+//  otherwise, update the viewDiv with the current entry information
+function updateViewDiv ( ) {
+   if ( searchMode ) {
+      lookForBooksMatching ( copyOfSelectedBook );
+   } else {
+      print ( makeTheHTMLforOneBook ( copyOfSelectedBook ) );
+   }
+}
 
 
 // LISTENERS
@@ -401,7 +413,6 @@ function updateBookNumbers ( book, index ) {
 clearFormButton.addEventListener ( 'click', ( event ) => {
    event.preventDefault();
    clearForm();
-   startSearchMode();
 } );
 
 // in the event the commit button is selected
@@ -418,11 +429,7 @@ commitButton.addEventListener ( 'click', ( event ) => {
 //    offering auto-fill options of past entries)
 entryDiv.addEventListener ( 'select', ( event ) => {
    copyOfSelectedBook[titleProperty] = titleInput.value;
-   if ( searchMode ) {
-      lookForBooksMatching ( copyOfSelectedBook );
-   } else {
-      print ( makeTheHTMLforOneBook ( copyOfSelectedBook ) );
-   }
+   updateViewDiv();
 } );
 
 // in the event a radio button in the Enjoyment Level group
@@ -437,13 +444,7 @@ enjoymentLevelRadioGroup.addEventListener ( 'click', ( event ) => {
       } else {
 	 copyOfSelectedBook[enjoymentLevelProperty] = event.target.value;
       }
-      // in search mode, update the viewDiv with the change in selection
-      //  otherwise, update the viewDiv with the current entry information
-      if ( searchMode ) {
-	 lookForBooksMatching ( copyOfSelectedBook );
-      } else {
-	 print ( makeTheHTMLforOneBook ( copyOfSelectedBook ) );
-      }
+      updateViewDiv();
    }
 } );
 
@@ -459,13 +460,7 @@ insightsOfferedRadioGroup.addEventListener ( 'click', ( event ) => {
       } else {
 	 copyOfSelectedBook[insightsOfferedProperty] = event.target.value;
       }
-      // in search mode, update the viewDiv with the change in selection
-      //  otherwise, update the viewDiv with the current entry information
-      if ( searchMode ) {
-	 lookForBooksMatching ( copyOfSelectedBook );
-      } else {
-	 print ( makeTheHTMLforOneBook ( copyOfSelectedBook ) );
-      }
+      updateViewDiv();
    }
 } );
 
@@ -500,13 +495,7 @@ checkboxGroup.addEventListener ( 'click', ( event ) => {
       copyOfSelectedBook[ownProperty] = ownInput.checked;
       copyOfSelectedBook[readProperty] = readInput.checked;
       copyOfSelectedBook[wishlistProperty] = wishlistInput.checked;
-      // in search mode, update the viewDiv with the change in selection
-      //  otherwise, update the viewDiv with the current entry information
-      if ( searchMode ) {
-	 lookForBooksMatching ( copyOfSelectedBook );
-      } else {
-	 print ( makeTheHTMLforOneBook ( copyOfSelectedBook ) );
-      }
+      updateViewDiv();
    }
 } );
 
@@ -549,13 +538,7 @@ readabilityEaseRadioGroup.addEventListener ( 'click', ( event ) => {
       } else {
 	 copyOfSelectedBook[readabilityEaseProperty] = event.target.value;
       }
-      // in search mode, update the viewDiv with the change in selection
-      //  otherwise, update the viewDiv with the current entry information
-      if ( searchMode ) {
-	 lookForBooksMatching ( copyOfSelectedBook );
-      } else {
-	 print ( makeTheHTMLforOneBook ( copyOfSelectedBook ) );
-      }
+      updateViewDiv();
    }
 } );
 
@@ -564,11 +547,7 @@ readabilityEaseRadioGroup.addEventListener ( 'click', ( event ) => {
 //  then print a message to the book information viewDiv
 titleInput.addEventListener ( 'click', ( event ) => {
    copyOfSelectedBook[titleProperty] = titleInput.value;
-   if ( searchMode ) {
-      lookForBooksMatching ( copyOfSelectedBook );
-   } else {
-      print ( makeTheHTMLforOneBook ( copyOfSelectedBook ) );
-   }
+   updateViewDiv();
 } );
 
 // if the titleInput has focus when the enter key is pressed
@@ -590,10 +569,8 @@ titleInput.addEventListener ( 'keyup', ( event ) => {
       if ( event.keyCode === 13 || event.key === 'Enter' ) {
          disregardTitleLength = true;
       }
-      lookForBooksMatching ( copyOfSelectedBook );
-   } else {
-      print ( makeTheHTMLforOneBook ( copyOfSelectedBook ) );
    }
+   updateViewDiv();
 } );
 
 // in the event a button in the viewDiv is selected
@@ -619,12 +596,16 @@ viewDiv.addEventListener ( 'click', ( event ) => {
 	 bookNumberForSubmission = books.length;
       }
       startSubmitMode();
-      print ( makeTheHTMLforOneBook ( copyOfSelectedBook ) );
+      // viewDiv must be updated after starting submit mode
+      //  to reflect the selected book information
+      updateViewDiv();
    } else if ( event.target.innerHTML === deleteText ) {
       bookNumberForSubmission = event.target.parentNode.parentNode.value;
       books.splice ( bookNumberForSubmission, 1 );
       books.forEach ( updateBookNumbers );
-      lookForBooksMatching ( copyOfSelectedBook );
+      // viewDiv will be updated according to search mode formatting
+      //  to no longer show the deleted book entry
+      updateViewDiv();
    }
 } );
 
